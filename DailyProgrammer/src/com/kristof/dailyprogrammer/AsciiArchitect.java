@@ -13,14 +13,15 @@ public class AsciiArchitect {
 
         for ( int i = 0; i < builderString.length(); i++ ) {
             String column = "";
-            if ( Character.isDigit( builderString.charAt( i ) ) ) {
-                for ( int j = 0; j < Character.getNumericValue( builderString.charAt( i ) ); j++ ) {
+            char currentChar = builderString.charAt( i );
+            if ( Character.isDigit( currentChar ) ) {
+                for ( int j = 0; j < Character.getNumericValue( currentChar ); j++ ) {
                     column += " ";
                 }
                 column += template.substring( 0, builderString.charAt( i + 1 ) - 96 );
             }
-            else if ( Character.isLetter( builderString.charAt( i ) ) && ( i == 0 || !Character.isDigit( builderString.charAt( i - 1 ) ) ) ) {
-                column += template.substring( 0, builderString.charAt( i ) - 96 );
+            else if ( Character.isLetter( currentChar ) && ( i == 0 || !Character.isDigit( builderString.charAt( i - 1 ) ) ) ) {
+                column += template.substring( 0, currentChar - 96 );
             }
             if ( !column.equals( "" ) ) {
                 while ( column.length() < 10 )
