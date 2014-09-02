@@ -26,7 +26,6 @@ public class MorseAudio {
             for ( Character letter : word.toCharArray() ) {
                 String morse = alphabet.get( letter.toString().toLowerCase() );
                 for ( String s : morse.split( "" ) ) {
-                    byte[] buf = new byte[1];
                     int length = 0;
                     if ( s.equals( "-" ) ) {
                         length = 500;
@@ -36,16 +35,15 @@ public class MorseAudio {
                     }
                     for ( int i = 0; i < length * (float)44100 / 1000; i++ ) {
                         double angle = i / ( (float)44100 / 440 ) * 2.0 * Math.PI;
-                        buf[0] = (byte)( Math.sin( angle ) * 100 );
-                        rawData.add( buf[0] );
+                        rawData.add( (byte)( Math.sin( angle ) * 100 ) );
                     }
                     for ( int i = 0; i < 2000; i++ )
-                        rawData.add( new Byte( (byte)1 ) );
+                        rawData.add( new Byte( (byte)0 ) );
 
                 }
             }
             for ( int i = 0; i < 10000; i++ )
-                rawData.add( new Byte( (byte)1 ) );
+                rawData.add( new Byte( (byte)0 ) );
         }
 
         byte[] audioData = new byte[rawData.size()];
